@@ -25,7 +25,7 @@ pipeline {
 
     post {
         success {
-            node {
+            node('master') {
                 dir("${env.WORKSPACE}") {
                     withCredentials([
                         usernamePassword(credentialsId: 'GitHub_Creds', passwordVariable: 'TOKEN', usernameVariable: 'USER'),
