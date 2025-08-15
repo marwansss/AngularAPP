@@ -6,8 +6,11 @@ pipeline{
     stages {
         stage('Test Agent') {
             steps {
-				echo "hello from mazo"
-                docker build -t frontend:1 front-end/.
+				dir('front-end') {
+    			echo "hello from mazo"
+                docker build -t frontend:1 .
+}
+				
             }
         }
     }
