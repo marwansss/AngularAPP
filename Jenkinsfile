@@ -44,7 +44,7 @@ pipeline {
                             cd /tmp ; git clone https://github.com/marwansss/AngularAPP.git ; cd AngularAPP
                             git config user.name "${USER}"
                             git config user.email "${GIT_USER}"
-                            git checkout main
+                            git checkout test ; git checkout main
                             git pull origin main
                             git merge test -m "merge test branch into main"
                             git push https://${USER}:${TOKEN}@github.com/marwansss/AngularAPP.git main
