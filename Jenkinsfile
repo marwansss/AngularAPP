@@ -1,16 +1,19 @@
-pipeline {
+pipeline{
     agent {
-        docker {
-            image 'docker:latest'
-            args '--privileged -v /var/run/docker.sock:/var/run/docker.sock'
-        }
-    }
+        docker { image 'docker:dind'}
+	}
 
     stages {
         stage('Test Agent') {
             steps {
-                sh 'docker build -t frontend:1 front-end/.'
+				echo "hello from mazo"
+                docker build -t frontend:1 front-end/.
             }
         }
     }
+
+
+
+
+
 }
