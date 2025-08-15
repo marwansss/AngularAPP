@@ -1,15 +1,12 @@
 pipeline{
     agent {
-        label 'inspirehub-agent'
+        docker { image 'docker:dind'}
 	}
 
     stages {
         stage('Test Agent') {
             steps {
-                sh 'whoami'
-                sh 'docker --version'
-                sh 'node --version'
-                sh 'npm --version'
+                docker build -t frontend:1 front-end/.
             }
         }
     }
