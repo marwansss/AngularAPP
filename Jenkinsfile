@@ -30,6 +30,7 @@ pipeline {
 				withCredentials([usernamePassword(credentialsId: 'GitHub_Creds', passwordVariable: 'TOKEN', usernameVariable: 'USER')]) {
 				    sh '''
 					pwd
+	 				ls -la
 					git config user.name "${USER}"
 					withCredentials([string(credentialsId: 'Git_User_Email', variable: 'GIT_USER')]) {
 					    git config user.email "${GIT_USER}"
