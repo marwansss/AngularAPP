@@ -20,4 +20,33 @@ pipeline {
             }
         }
     }
+
+	
+
+	post{
+		success{
+			script{
+				withCredentials([usernamePassword(credentialsId: 'GitHub_Creds', passwordVariable: 'TOKEN', usernameVariable: 'USER')]) {
+				    sh '''
+					git config user.name "${USER}"
+					withCredentials([string(credentialsId: 'Git_User_Email', variable: 'GIT_USER')]) {
+					    git config user.email "${GIT_USER}"
+					}
+					git checkout main
+					git pull origin main
+					git merge test -m "merge test branch into main"
+					git push https://${USER}:${TOKEN}@github.com/marwansss/AngularAPP.git main
+				    '''
+				}
+
+			}
+	
+
+
+
+		}
+
+	}
+
+
 }
