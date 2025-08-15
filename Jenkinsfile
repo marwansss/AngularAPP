@@ -21,35 +21,29 @@ pipeline {
                 }
             }
         }
+    }
 
-
-stage('Merge to Main') {
-    agent any
-    steps {
-        dir("${env.WORKSPACE}") {
-            withCredentials([
-                usernamePassword(credentialsId: 'GitHub_Creds', passwordVariable: 'TOKEN', usernameVariable: 'USER'),
-                string(credentialsId: 'Git_User_Email', variable: 'GIT_USER')
-            ]) {
-                sh '''
-                    pwd
-                    ls -la
-                    git config user.name "${USER}"
-                    git config user.email "${GIT_USER}"
-                    git checkout main
-                    git pull origin main
-                    git merge test -m "merge test branch into main"
-                    git push https://${USER}:${TOKEN}@github.com/marwansss/AngularAPP.git main
-                '''
+    post {
+        success {
+            script {
+                    withCredentials([
+                        usernamePassword(credentialsId: 'GitHub_Creds', passwordVariable: 'TOKEN', usernameVariable: 'USER'),
+                        string(credentialsId: 'Git_User_Email', variable: 'GIT_USER')
+                    ]) {
+                        sh """
+                        
+                            git clone https://github.com/marwansss/AngularAPP.git
+                            cd AngularAPP;
+                            git config user.name "${USER}"
+                            git config user.email "${GIT_USER}"
+                            git checkout main
+                            git pull origin main
+                            #git merge test -m "merge test branch into main"
+                            #git push https://${USER}:${TOKEN}@github.com/marwansss/AngularAPP.git main
+                        """
+                    }
             }
+        
         }
     }
-}
-
-
-
-        
-    }
-
-
 }
