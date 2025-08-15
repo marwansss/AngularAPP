@@ -11,9 +11,10 @@ pipeline {
                 dir('front-end') {
                     withCredentials([usernamePassword(credentialsId: 'DockerHub_Creds', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
                         sh """
-                            docker build -t maro4299311/inspirehub-jenkins-dynamic-agent:${BUILD_NUMBER} .
-                            docker login -u ${USER} -p ${PASS}
-                            docker push maro4299311/inspirehub-jenkins-dynamic-agent:${BUILD_NUMBER}
+							echo "hello"
+                            #docker build -t maro4299311/inspirehub-jenkins-dynamic-agent:${BUILD_NUMBER} .
+                            #docker login -u ${USER} -p ${PASS}
+                            #docker push maro4299311/inspirehub-jenkins-dynamic-agent:${BUILD_NUMBER}
                         """
                     }
                 }
@@ -28,6 +29,7 @@ pipeline {
 			script{
 				withCredentials([usernamePassword(credentialsId: 'GitHub_Creds', passwordVariable: 'TOKEN', usernameVariable: 'USER')]) {
 				    sh '''
+					pwds
 					git config user.name "${USER}"
 					withCredentials([string(credentialsId: 'Git_User_Email', variable: 'GIT_USER')]) {
 					    git config user.email "${GIT_USER}"
