@@ -15,4 +15,9 @@ jobs:
     #Define the steps that will belong to the jobs
     steps:
       - name: print a welcome message
-        run: echo "welcome to our first github actions workflow!"
+        run: echo "welcome to our first github actions workflow!" 
+      - name: checkout repository
+        uses: actions/checkout@v5.0.0
+
+      - name: list repo files
+        run: ls -la
