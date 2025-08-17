@@ -1,5 +1,5 @@
 #!/bin/bash
-
+#comment1
 EXPECTED= "hello, test!"
 OUTPUT=$(node -e "console.log(require('./src/app')('test'))")
 
