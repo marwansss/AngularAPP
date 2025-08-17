@@ -1,8 +1,6 @@
 #!/bin/bash
-# comment1
-
 EXPECTED="hello, test!"
-OUTPUT=$(node -e "console.log(require('./src/app')('test'))")
+OUTPUT=$(node -e "console.log(require('./app')('test'))")
 
 if [ "$OUTPUT" == "$EXPECTED" ]; then
   echo "test passed"
