@@ -1,0 +1,11 @@
+on:
+#manual triggering but with http or api call
+  repository_dispatch:
+  # this type to allow trigger pipeline using api calls
+    types: [ incident_report ]
+jobs:
+  handle-incident:
+    runs-on:  ubuntu-latest
+    steps:
+      - name: print incident details
+        run: echo "incident reported"
