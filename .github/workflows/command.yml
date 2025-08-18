@@ -8,6 +8,7 @@ jobs:
       - run: |
           deprecated=true
           if [[ deprecated ]]; then
+          # use warning action function to print warning
             echo "::warning::Deprecated"
           fi
 
@@ -18,3 +19,11 @@ jobs:
 
       - name: use api key
         run: echo "${API_KEY}"
+
+      - name: check file exists
+        run: | 
+          if [ -f config.yaml ]; then
+            echo "::debug::config.yaml exists"
+          else
+          #use error function to print error
+            echo "::error::config.yaml is missing"
