@@ -27,3 +27,4 @@ jobs:
           else
           #use error function to print error
             echo "::error::config.yaml is missing"
+          fi
