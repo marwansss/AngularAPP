@@ -27,7 +27,7 @@ jobs:
       - name: build front-end docker image
         working-directory: front-end
         run: |
-          docker built -tdd maro4299311/inspirehub-jenkins-dynamic-agent:${{ github.run_number }} .
+          docker build -t maro4299311/inspirehub-jenkins-dynamic-agent:${{ github.run_number }} .
           docker push maro4299311/inspirehub-jenkins-dynamic-agent:${{ github.run_number }}
 
       - name: sending success message in microsoft teams
