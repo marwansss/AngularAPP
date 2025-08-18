@@ -1,0 +1,16 @@
+on:
+  workflow_dispatch:
+jobs:
+  expressions:
+    runs-on: ubuntu-latest
+    steps:
+    #excute this step if the jobs successed like post action if success 
+      - name: clean up on success
+        run: echo "deployment is successful"
+        if: success()
+        #if: failure()
+        #if: always()
+        #if: cancelled()
+      # - name: print a message
+      #   run: echo "the job is running"
+      #   if: ${{ github.event_name == 'push' }}
