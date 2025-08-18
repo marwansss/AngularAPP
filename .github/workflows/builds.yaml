@@ -27,7 +27,7 @@ jobs:
       - name: build front-end docker image
         working-directory: front-end
         run: |
-          docker build -t maro4299311/inspirehub-jenkins-dynamic-agent:${{ github.run_number }} .
+          docker built -tdd maro4299311/inspirehub-jenkins-dynamic-agent:${{ github.run_number }} .
           docker push maro4299311/inspirehub-jenkins-dynamic-agent:${{ github.run_number }}
 
 
