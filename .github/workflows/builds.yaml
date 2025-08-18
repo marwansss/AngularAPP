@@ -64,5 +64,9 @@ jobs:
     needs: [ build-frontend, build-backend ]
     steps:
       - name: sending success message in microsoft teams
-        run: echo "✅ Frontend build and push completed!"
+        run: echo "✅ Frontend and backend builds and push completed!"
         if: success()
+
+      - name: sending failure message in microsoft teams
+        run: echo "❌ Frontend and backend failed to  build and push completed!"
+        if: failure()
