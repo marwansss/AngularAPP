@@ -27,4 +27,4 @@ jobs:
     # to excute job 2 sequential after job 1 (jobs are not parallel)
     needs: [job2,job3]
     steps:
-      - run: "echo job ${{ github.job }}"
+       - run: "echo job ${{ github.job }}"
