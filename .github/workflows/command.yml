@@ -4,8 +4,17 @@ jobs:
   example:
     runs-on: ubuntu-latest
     steps:
+    # print warning annotaion to notify developer if there is something wrong in the pipeline
       - run: |
           deprecated=true
           if [[ deprecated ]]; then
             echo "::warning::Deprecated"
           fi
+
+    # redirect the value to github action environment variable
+      - name: set api key
+        run: echo "API_KEY=12345" >> $GITHUB_ENV
+
+
+      - name: use api key
+        run: echo "${API_KEY}"
