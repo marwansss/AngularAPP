@@ -30,12 +30,12 @@ jobs:
           docker built -tdd maro4299311/inspirehub-jenkins-dynamic-agent:${{ github.run_number }} .
           docker push maro4299311/inspirehub-jenkins-dynamic-agent:${{ github.run_number }}
 
-      - name: frontend docker image build successfuly
-        run: echo "building frontend docker image is successful"
+      - name: sending success message in microsoft teams
+        run: echo "✅ pipeline successfuly finished! Frontend image build and push completed!"
         if: success()
 
-      - name: frontend docker image build failure
-        run: echo "building frontend docker image is failed"
+      - name: sending failure message in microsoft teams
+        run: echo "❌ pipeline failure! Frontend failed to  build and push"
         if: failure()
 
 #---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -64,24 +64,24 @@ jobs:
           docker build -t maro4299311/nodejs:${{ github.run_number }} .
           docker push maro4299311/nodejs:${{ github.run_number }}
       
-      - name: backend docker image build successfuly
-        run: echo "building backend docker image is successful"
+      - name: sending success message in microsoft teams
+        run: echo "✅ pipeline successfuly finished! backend image build and push completed!"
         if: success()
 
-      - name: backend docker image build failure
-        run: echo "building backend docker image is failed"
+      - name: sending failure message in microsoft teams
+        run: echo "❌ pipeline failure! backend failed to  build and push"
         if: failure()
 
 #---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  post-action:
-    runs-on: ubuntu-latest
-    needs: [ build-frontend, build-backend ]
-    steps:
-      - name: sending success message in microsoft teams
-        run: echo "✅ Frontend and backend builds and push completed!"
-        if: success()
+  # post-action:
+  #   runs-on: ubuntu-latest
+  #   needs: [ build-frontend, build-backend ]
+  #   steps:
+  #     - name: sending success message in microsoft teams
+  #       run: echo "✅ Frontend and backend builds and push completed!"
+  #       if: success()
 
-      - name: sending failure message in microsoft teams
-        run: echo "❌ Frontend and backend failed to  build and push completed!"
-        if: failure()
+  #     - name: sending failure message in microsoft teams
+  #       run: echo "❌ Frontend and backend failed to  build and push completed!"
+  #       if: failure()
