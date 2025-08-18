@@ -30,6 +30,13 @@ jobs:
           docker built -tdd maro4299311/inspirehub-jenkins-dynamic-agent:${{ github.run_number }} .
           docker push maro4299311/inspirehub-jenkins-dynamic-agent:${{ github.run_number }}
 
+      - name: frontend docker image build successfuly
+        run: echo "building frontend docker image is successful"
+        if: success()
+
+      - name: frontend docker image build failure
+        run: echo "building frontend docker image is failed"
+        if: failure()
 
 #---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -51,11 +58,19 @@ jobs:
  
           
         
-      - name: build front-end docker image
+      - name: build backend docker image
         working-directory: backend
         run: |
           docker build -t maro4299311/nodejs:${{ github.run_number }} .
           docker push maro4299311/nodejs:${{ github.run_number }}
+      
+      - name: backend docker image build successfuly
+        run: echo "building backend docker image is successful"
+        if: success()
+
+      - name: backend docker image build failure
+        run: echo "building backend docker image is failed"
+        if: failure()
 
 #---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
