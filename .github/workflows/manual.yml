@@ -1,6 +1,17 @@
 on:
 # trigging mechanism is manual
   workflow_dispatch:
+  # add something like parameters in jenkins
+    inputs:
+      environment:
+        description: "choose env"
+        required: true
+        default: "staging"
+        type: choice
+        options:
+          - staging
+          - production
+      
 jobs:
   deploy:
     runs-on: ubuntu-latest
