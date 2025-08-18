@@ -1,0 +1,30 @@
+on:
+  workflow_dispatch:
+jobs:
+  job1:
+    runs-on: ubuntu-latest
+    steps:
+      - run: "echo job ${{ github.job }}"
+
+  job2:
+    runs-on: ubuntu-latest
+    # to excute job 2 sequential after job 1 (jobs are not parallel)
+    needs: job1
+    steps:
+      - run: "echo job ${{ github.job }}"
+
+
+  job3:
+    runs-on: ubuntu-latest
+    # to excute job 2 sequential after job 1 (jobs are not parallel)
+    needs: job1
+    steps:
+      - run: "echo job ${{ github.job }}"
+
+
+  job4:
+    runs-on: ubuntu-latest
+    # to excute job 2 sequential after job 1 (jobs are not parallel)
+    needs: [job2,job3]
+    steps:
+      - run: "echo job ${{ github.job }}"
