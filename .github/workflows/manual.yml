@@ -1,0 +1,9 @@
+on:
+# trigging mechanism is manual
+  workflow_dispatch:
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy app
+        run: echo "deploying the app"
