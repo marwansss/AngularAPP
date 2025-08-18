@@ -28,3 +28,9 @@ jobs:
           #use error function to print error
             echo "::error::config.yaml is missing"
           fi
+
+      - name: use add mask command to hide sensetive data
+        run: | 
+          #use add mask function to hide data
+            echo "::add-mask::${API_KEY}"
+            echo "using api key ${API_KEY}"
