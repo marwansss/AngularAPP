@@ -1,5 +1,5 @@
 on:
-# trigging mechanism is manual
+# trigging mechanism is manual using github cli or github GUI
   workflow_dispatch:
   # add something like parameters in jenkins
     inputs:
