@@ -11,7 +11,7 @@ jobs:
             echo "::warning::Deprecated"
           fi
 
-    # redirect the value to github action environment variable
+    # redirect the value to github action environment variable to be used in another step
       - name: set api key
         run: echo "API_KEY=12345" >> $GITHUB_ENV
 
