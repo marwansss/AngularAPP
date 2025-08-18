@@ -1,0 +1,28 @@
+on:
+  workflow_dispatch:
+jobs:
+  hybrid_job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: runs a command on ubuntu vm
+        run: echo "this is ubuntu vm"
+
+      - name: run inside alpine container but must be public docker image
+        uses: docker://alpine:3.14 # image must be accessible without auth on dockerhub
+        with:
+          entrypoint: /bin/sh
+          args: | 
+            -c "echo 'this run inside an alpine container'"
+
+
+      - name: run another command in ubuntu vm
+        run: echo "back to vm"
+
+
+#this job is to run command inside docker container and can be public or private docker image
+  dockerized_job:
+    runs-on: ubuntu-latest
+    container: node:20
+    steps:
+      - run: node --version
+      - run: echo "this whole job runs inside node js container"

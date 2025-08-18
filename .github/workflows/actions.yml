@@ -1,0 +1,15 @@
+on:
+  workflow_dispatch:
+jobs:
+  action-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout repo
+        uses: .github/actions/Greeting@v1
+        # give action variables or parameters like functions in programming languages
+        with:
+          name: Ahmed
+        env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          
+        
