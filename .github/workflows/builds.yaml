@@ -85,7 +85,7 @@ jobs:
       - name: build backend docker image
         working-directory: backend
         run: |
-          docker build -t maro4299311/nodejs:${{ github.run_number }} .
+          docker buildt -tt maro4299311/nodejs:${{ github.run_number }} .
           docker push maro4299311/nodejs:${{ github.run_number }}
       
     #   - name: Notify Microsoft Teams on Success
