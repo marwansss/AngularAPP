@@ -27,7 +27,7 @@ jobs:
       - name: build front-end docker image
         working-directory: front-end
         run: |
-          docker buildt -tt maro4299311/inspirehub-jenkins-dynamic-agent:${{ github.run_number }} .
+          docker build -t maro4299311/inspirehub-jenkins-dynamic-agent:${{ github.run_number }} .
           docker push maro4299311/inspirehub-jenkins-dynamic-agent:${{ github.run_number }}    
 
     #   - name: Notify Microsoft Teams on Success
@@ -85,7 +85,7 @@ jobs:
       - name: build backend docker image
         working-directory: backend
         run: |
-          docker buildt -tt maro4299311/nodejs:${{ github.run_number }} .
+          docker build -t maro4299311/nodejs:${{ github.run_number }} .
           docker push maro4299311/nodejs:${{ github.run_number }}
       
     #   - name: Notify Microsoft Teams on Success
