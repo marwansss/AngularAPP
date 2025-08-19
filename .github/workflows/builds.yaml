@@ -30,22 +30,22 @@ jobs:
           docker buildt -tt maro4299311/inspirehub-jenkins-dynamic-agent:${{ github.run_number }} .
           docker push maro4299311/inspirehub-jenkins-dynamic-agent:${{ github.run_number }}    
 
-      - name: Notify Microsoft Teams on Success
-        uses: Skitionek/notify-microsoft-teams@v1.0.4
-        if: success()
-        with:
-    # teams incoming webhook url
-          webhook_url: ${{ secrets.MS_TEAMS }}
-    # JSON object to send to Microsoft Teams
-          raw: |
-             {
-              "@type": "MessageCard",
-              "@context": "https://schema.org/extensions",
-              "summary": "Pipeline Status",
-              "themeColor": "00FF00",
-              "title": "✅ Pipeline Successful!",
-              "text": "Frontend image build and push completed successfully for run #${{ github.run_number }} on branch `${{ github.ref_name }}`."
-              }
+    #   - name: Notify Microsoft Teams on Success
+    #     uses: Skitionek/notify-microsoft-teams@v1.0.4
+    #     if: success()
+    #     with:
+    # # teams incoming webhook url
+    #       webhook_url: ${{ secrets.MS_TEAMS }}
+    # # JSON object to send to Microsoft Teams
+    #       raw: |
+    #          {
+    #           "@type": "MessageCard",
+    #           "@context": "https://schema.org/extensions",
+    #           "summary": "Pipeline Status",
+    #           "themeColor": "00FF00",
+    #           "title": "✅ Pipeline Successful!",
+    #           "text": "Frontend image build and push completed successfully for run #${{ github.run_number }} on branch `${{ github.ref_name }}`."
+    #           }
         
       - name: Notify Microsoft Teams on Failure
         uses: Skitionek/notify-microsoft-teams@v1.0.4
@@ -88,22 +88,22 @@ jobs:
           docker build -t maro4299311/nodejs:${{ github.run_number }} .
           docker push maro4299311/nodejs:${{ github.run_number }}
       
-      - name: Notify Microsoft Teams on Success
-        uses: Skitionek/notify-microsoft-teams@v1.0.4
-        if: success()
-        with:
-    # teams incoming webhook url
-          webhook_url: ${{ secrets.MS_TEAMS }}
-    # JSON object to send to Microsoft Teams
-          raw: |
-             {
-              "@type": "MessageCard",
-              "@context": "https://schema.org/extensions",
-              "summary": "Pipeline Status",
-              "themeColor": "00FF00",
-              "title": "✅ Pipeline Successful!",
-              "text": "backend image build and push completed successfully for run #${{ github.run_number }} on branch `${{ github.ref_name }}`."
-              }
+    #   - name: Notify Microsoft Teams on Success
+    #     uses: Skitionek/notify-microsoft-teams@v1.0.4
+    #     if: success()
+    #     with:
+    # # teams incoming webhook url
+    #       webhook_url: ${{ secrets.MS_TEAMS }}
+    # # JSON object to send to Microsoft Teams
+    #       raw: |
+    #          {
+    #           "@type": "MessageCard",
+    #           "@context": "https://schema.org/extensions",
+    #           "summary": "Pipeline Status",
+    #           "themeColor": "00FF00",
+    #           "title": "✅ Pipeline Successful!",
+    #           "text": "backend image build and push completed successfully for run #${{ github.run_number }} on branch `${{ github.ref_name }}`."
+    #           }
         
       - name: Notify Microsoft Teams on Failure
         uses: Skitionek/notify-microsoft-teams@v1.0.4
@@ -122,15 +122,26 @@ jobs:
 
 #---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  # post-action:
-  #   runs-on: ubuntu-latest
-  #   needs: [ build-frontend, build-backend ]
-  #   steps:
-  #     - name: sending success message in microsoft teams
-  #       run: echo "✅ Frontend and backend builds and push completed!"
-  #       if: success()
+  post-action:
+    runs-on: ubuntu-latest
+    needs: [ build-frontend, build-backend ]
+    steps:
+      - name: Notify Microsoft Teams on Pipeline Success
+        uses: Skitionek/notify-microsoft-teams@v1.0.4
+        if: success()
+        with:
+    # teams incoming webhook url
+          webhook_url: ${{ secrets.MS_TEAMS }}
+    # JSON object to send to Microsoft Teams
+          raw: |
+             {
+              "@type": "MessageCard",
+              "@context": "https://schema.org/extensions",
+              "summary": "Pipeline Status",
+              "themeColor": "00FF00",
+              "title": "✅ Pipeline Successful!",
+              "text": "frontend and backend images are built and pushed  successfully for run #${{ github.run_number }} on branch `${{ github.ref_name }}`."
+              }
 
-  #     - name: sending failure message in microsoft teams
-  #       run: echo "❌ Frontend and backend failed to  build and push completed!"
-  #       if: failure()
+
 
