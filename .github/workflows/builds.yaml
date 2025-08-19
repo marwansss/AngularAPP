@@ -33,10 +33,45 @@ jobs:
       - name: sending success message in microsoft teams
         run: echo "✅ pipeline successfuly finished! Frontend image build and push completed!"
         if: success()
+      
+
+      - name: Notify Microsoft Teams on Success
+        uses: Skitionek/notify-microsoft-teams@v1.0.4
+        if: success()
+        with:
+    # teams incoming webhook url
+          webhook_url: ${{ secrets.MS_TEAMS }}
+    # JSON object to send to Microsoft Teams
+          raw: |
+             {
+              "@type": "MessageCard",
+              "@context": "https://schema.org/extensions",
+              "summary": "Pipeline Status",
+              "themeColor": "00FF00",
+              "title": "✅ Pipeline Successful!",
+              "text": "Frontend image build and push completed successfully for run #${{ github.run_number }} on branch `${{ github.ref_name }}`."
+              }
+          
 
       - name: sending failure message in microsoft teams
         run: echo "❌ pipeline failure! Frontend failed to  build and push"
         if: failure()
+
+
+      - name: Notify Microsoft Teams on Failure
+        uses: Skitionek/notify-microsoft-teams@v1.0.4
+        if: failure()
+        with:
+          webhook_url: ${{ secrets.MS_TEAMS }}
+          raw: |
+            {
+              "@type": "MessageCard",
+              "@context": "https://schema.org/extensions",
+              "summary": "Pipeline Status",
+              "themeColor": "FF0000",
+              "title": "❌ Pipeline Failed!",
+              "text": "Frontend build and push failed for run #${{ github.run_number }} on branch `${{ github.ref_name }}`."
+            }
 
 #---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -85,3 +120,4 @@ jobs:
   #     - name: sending failure message in microsoft teams
   #       run: echo "❌ Frontend and backend failed to  build and push completed!"
   #       if: failure()
+
